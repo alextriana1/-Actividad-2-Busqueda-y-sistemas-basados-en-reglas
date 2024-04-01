@@ -61,3 +61,45 @@ estaciones = {
     5: Estacion(5),
     6: Estacion(6)
 }
+
+# Establecer conexiones entre estaciones y tiempos de viaje
+estaciones[1].agregar_vecino(estaciones[2], 5)
+estaciones[1].agregar_vecino(estaciones[3], 10)
+estaciones[1].agregar_vecino(estaciones[4], 8)
+estaciones[1].agregar_vecino(estaciones[5], 12)
+
+estaciones[2].agregar_vecino(estaciones[1], 5)
+estaciones[2].agregar_vecino(estaciones[3], 3)
+estaciones[2].agregar_vecino(estaciones[6], 7)
+
+estaciones[3].agregar_vecino(estaciones[1], 10)
+estaciones[3].agregar_vecino(estaciones[2], 3)
+
+estaciones[4].agregar_vecino(estaciones[1], 8)
+estaciones[5].agregar_vecino(estaciones[1], 12)
+
+estaciones[6].agregar_vecino(estaciones[2], 7)
+
+# Solicitar al usuario la estación de origen y destino
+while True:
+    origen = int(input("Ingrese el número de la estación de origen (1, 2, 3, 4, 5, 6): "))
+    if origen in estaciones:
+        break
+    else:
+        print("Estación de origen no válida. Intente nuevamente.")
+
+while True:
+    destino = int(input("Ingrese el número de la estación de destino (1, 2, 3, 4, 5, 6): "))
+    if destino in estaciones:
+        break
+    else:
+        print("Estación de destino no válida. Intente nuevamente.")
+
+# Encontrar la ruta óptima
+ruta_optima, tiempo_total = encontrar_ruta(estaciones[origen], estaciones[destino])
+
+if ruta_optima:
+    print("Ruta óptima encontrada:", ruta_optima)
+    print("Tiempo total de viaje:", tiempo_total, "minutos")
+else:
+    print("No se pudo encontrar una ruta.")
